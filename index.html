@@ -13,15 +13,30 @@
 <body>
     <div class="wrapper">
         <div id="app">
-            <div class="container">
+            <div class="container px-0">
                 <div class="row">
                     <aside class="col-5 gx-0">
-                        <nav>
-                            Avatar utente
+                        <nav class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <img class="avatar-img nav-img" src="./img/avatar_io.jpg" alt="Your pic">
+                                <span class="ms-1">Sofia</span>
+                            </div>
+
+                            <div class="icons">
+                                <i class="fa-solid fa-circle-notch"></i>
+                                <i class="fa-solid fa-message"></i>
+                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                            </div>
                         </nav>
 
-                        <div class="new-notifications">
-                            Ricevi notifiche di nuovi messaggi
+                        <div class="new-notifications d-flex align-items-center">
+                            <div class="bell-icon">
+                                <i class="fa-solid fa-bell-slash"></i>
+                            </div>
+                            <div>
+                                Ricevi notifiche di nuovi messaggi<br>
+                                <a href="#">Attiva notifiche desktop</a>
+                            </div>
                         </div>
 
                         <div class="search-bar d-flex align-items-center">
@@ -29,34 +44,40 @@
                             <input type="text" placeholder="Cerca o inizia una nuova chat">
                         </div>
 
-                        <ul class="ps-0">
-                            <li v-for="(contact, id) in contacts" :key="id">
-                                <div class="d-flex justify-content-start py-2">
-                                    <img class="avatar-img" v-bind:src="contact.avatar"></img>
-                                    <span class="ms-3">{{ contact.name }}</span>
-                                </div>    
-                            </li>
-                        </ul>
+                        <div class="contacts-list">
+                            <ul>
+                                <li v-for="(contact, id) in contacts" :key="id" @click="activateUser(id)">
+                                    <div class="user-preview d-flex justify-content-start py-2" :class="id == activeContact ? 'active' : ''">
+                                        <img class="avatar-img" :src="`./img/avatar${contact.avatar}.jpg`" alt="User pic">
+                                        <span class="ms-3">{{ contact.name }}</span>
+                                    </div>    
+                                </li>
+                            </ul>
+                        </div>
                     </aside>
         
                     <main class="col-7 gx-0">
                         <nav>
-                            Chat contatto
+                            <div class="d-flex justify-content-between align-items-center pt-1">
+                                <div>
+                                    <img class="avatar-img nav-img" :src="`./img/avatar${contacts[activeContact].avatar}.jpg`" alt="User pic">
+                                    <span  class="ms-1">{{ contacts[activeContact].name }}</span>
+                                </div>
+
+                                <div class="icons">
+                                    <i class="fa-solid fa-magnifying-glass"></i> 
+                                    <i class="fa-solid fa-paperclip"></i>
+                                    <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </div>
+                            </div>
                         </nav>
 
                         <div class="chat-window">
                             <ul>
-                                <li v-for="(message, index) in messages" :key="index">
-                                    <div>
-                                       <!-- {{ contacts[activeContact].messages[index] }} -->
-                                       
+                                <li class="bubble" v-for="(item, index) in contacts[activeContact].messages" :class="item.status == 'sent' ? 'sent' : 'received'">
+                                    {{ contacts[activeContact].messages[index].message }}
 
-                                    <!-- {{ contacts[activeContact].messages[index].message[1] }} -->
-                                    
-
-                                    </div>
-
-                                </li>
+                                </li>           
                             </ul>
                         </div>
 

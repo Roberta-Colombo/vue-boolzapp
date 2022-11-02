@@ -4,12 +4,11 @@ createApp({
     data() {
         return {
             activeContact: 0,
-            showedMessage: 0,
             contacts: [
                 {
                     name: 'Michele',
                     id: '1',
-                    avatar: './img/avatar_1.jpg',
+                    avatar: '_1',
                     visible: true,
                     messages: [
                         {  
@@ -32,7 +31,7 @@ createApp({
                 {
                     name: 'Fabio',
                     id: '2',
-                    avatar: './img/avatar_2.jpg',
+                    avatar: '_2',
                     visible: true,
                     messages: [
                         {
@@ -55,7 +54,7 @@ createApp({
                 {
                     name: 'Samuele',
                     id: '3',
-                    avatar: './img/avatar_3.jpg',
+                    avatar: '_3',
                     visible: true,
                     messages: [
                         {
@@ -78,7 +77,7 @@ createApp({
                 {
                     name: 'Alessandro B.',
                     id: '4',
-                    avatar: './img/avatar_4.jpg',
+                    avatar: '_4',
                     visible: true,
                     messages: [
                         {
@@ -96,7 +95,7 @@ createApp({
                 {
                     name: 'Alessandro L.',
                     id: '5',
-                    avatar: './img/avatar_5.jpg',
+                    avatar: '_5',
                     visible: true,
                     messages: [
                         {
@@ -114,7 +113,7 @@ createApp({
                 {
                     name: 'Claudia',
                     id: '6',
-                    avatar: './img/avatar_6.jpg',
+                    avatar: '_6',
                     visible: true,
                     messages: [
                         {
@@ -137,7 +136,7 @@ createApp({
                 {
                     name: 'Federico',
                     id: '7',
-                    avatar: './img/avatar_7.jpg',
+                    avatar: '_7',
                     visible: true,
                     messages: [
                         {
@@ -155,7 +154,7 @@ createApp({
                 {
                     name: 'Davide',
                     id: '8',
-                    avatar: './img/avatar_8.jpg',
+                    avatar: '_8',
                     visible: true,
                     messages: [
                         {
@@ -177,7 +176,15 @@ createApp({
                 }
             ]
         }
+    },
+    methods: {
+        activateUser(id) {
+            this.activeContact = this.contacts.findIndex((item)=> {
+                return id === item.id
+            })
+        }
     }
+
 }).mount('#app')
 
 
