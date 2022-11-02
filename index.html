@@ -12,18 +12,62 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="container">
-            <div class="row">
-                <aside class="col-5">
-                    Lista contatti
-                </aside>
-    
-                <main class="col-7">
-                    Finestra chat
-                </main>   
-            </div>
+        <div id="app">
+            <div class="container">
+                <div class="row">
+                    <aside class="col-5 gx-0">
+                        <nav>
+                            Avatar utente
+                        </nav>
 
+                        <div class="new-notifications">
+                            Ricevi notifiche di nuovi messaggi
+                        </div>
+
+                        <div class="search-bar d-flex align-items-center">
+                            <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" placeholder="Cerca o inizia una nuova chat">
+                        </div>
+
+                        <ul class="ps-0">
+                            <li v-for="(contact, id) in contacts" :key="id">
+                                <div class="d-flex justify-content-start py-2">
+                                    <img class="avatar-img" v-bind:src="contact.avatar"></img>
+                                    <span class="ms-3">{{ contact.name }}</span>
+                                </div>    
+                            </li>
+                        </ul>
+                    </aside>
+        
+                    <main class="col-7 gx-0">
+                        <nav>
+                            Chat contatto
+                        </nav>
+
+                        <div class="chat-window">
+                            <ul>
+                                <li v-for="(message, index) in messages" :key="index">
+                                    <div>
+                                       <!-- {{ contacts[activeContact].messages[index] }} -->
+                                       
+
+                                    <!-- {{ contacts[activeContact].messages[index].message[1] }} -->
+                                    
+
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+
+                        <footer>
+                            input 
+                        </footer>
+                    </main>   
+                </div>    
+            </div>
         </div>
+
     </div>
     
 

@@ -6,15 +6,81 @@
 
 .container {
     margin: 0 auto;
-    border: 1px solid black;
     width: 80%;
     height: calc(100vh - 60px);
 }
 
 aside {
     border: 1px solid black;
+    background-color: white;
 }
 
 main {
     border: 1px solid black;
+}
+
+nav {
+    height: 50px;
+    background-color: #EAEAEA;
+}
+
+.new-notifications {
+    height: 60px;
+    background-color: #8EDAFC;
+}
+
+.search-bar {
+    height: 40px;
+    background-color: #EAEAEA;
+    text-align: center;
+}
+
+#search-btn {
+    height: 25px;
+    margin-left: 10px;
+    border-style: none;
+    border-right: 1px solid #EAEAEA;
+    color: darkgray;
+    width: 10%;
+    background-color: white;
+    font-size: 12px;
+}
+
+input {
+    width: 80%;
+    border-style: none;
+    border-radius: 2px;
+    font-size: 11px;
+    color: darkgray;
+    height: 25px;
+    padding-left: 10px;
+}
+
+li {
+    list-style: none;
+    border-top: 1px solid #EAEAEA;
+    padding-left: 15px;
+}
+
+.avatar-img {
+    width: 10%;
+    border-radius: 50%;
+}
+
+footer {
+    height: 50px;
+    background-color: #EAEAEA;
+}
+
+.chat-window {
+    height: calc(100% - 100px);
+    background-image: url("../img/mine.jpg");
+}
+
+.sent {
+    background-color: rgb(203, 246, 203);
+}
+
+.received {
+    background-color: white;
 }
