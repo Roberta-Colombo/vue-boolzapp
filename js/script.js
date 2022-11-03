@@ -4,6 +4,7 @@ createApp({
     data() {
         return {
             activeContact: 0,
+            newMessage: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -182,9 +183,30 @@ createApp({
             this.activeContact = this.contacts.findIndex((item)=> {
                 return id === item.id
             })
+        }, 
+        sendMessage(){
+            if(!this.newMessage) return;
+            const msgDate = new Date().toLocaleDateString('it-IT');
+            const newSentMessage = {
+                date: msgDate,
+                message: this.newMessage,
+                status: 'sent'
+            }
+
+            this.contacts[this.activeContact].messages.push(newSentMessage);
+            this.newMessage = '';
+
+            setTimeout(()=> {
+                const newReceivedMessage = {
+                    date: msgDate,
+                    message: 'OK!',
+                    status: 'received'
+                }
+    
+                this.contacts[this.activeContact].messages.push(newReceivedMessage);
+            },1000)
         }
     }
-
 }).mount('#app')
 
 
