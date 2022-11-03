@@ -5,6 +5,7 @@ createApp({
         return {
             activeContact: 0,
             newMessage: '',
+            userSearch: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -176,6 +177,14 @@ createApp({
                     ],
                 }
             ]
+        }
+    },
+    computed: {
+        filteredContacts() {
+            return  this.contacts = this.contacts.filter((item)=>{
+                const userName = item.name.toLowerCase();
+                return userName.includes(this.userSearch.toLowerCase())
+            })
         }
     },
     methods: {
