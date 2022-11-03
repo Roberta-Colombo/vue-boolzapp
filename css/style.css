@@ -98,6 +98,12 @@ li {
     width: 40px;
 }
 
+.last-msg {
+    font-size: 11px;
+    color: grey;
+}
+
+
 .icons i, footer i {
     color: grey;
     margin-right: 15px;
@@ -118,7 +124,7 @@ footer {
     flex-flow: column wrap;
     align-items: flex-start;
     justify-content: flex-start;
-    padding: 25px 30px;
+    padding: 25px 35px;
 }
 
 .bubble {

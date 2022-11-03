@@ -50,7 +50,12 @@
                                 <li v-for="(contact, id) in filteredContacts" :key="id" @click="activateUser(contact.id)">
                                     <div class="user-preview d-flex justify-content-start py-2" :class="id == activeContact ? 'active' : ''">
                                         <img class="avatar-img" :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name">
-                                        <span class="ms-3">{{ contact.name }}</span>
+                                        <div>
+                                            <div class="ms-3">{{ contact.name }}<br>
+                                            <div class="last-msg">{{ printLastMsg(contact).message }}</div>
+                                            </div> 
+                                              
+                                        </div>
                                     </div>    
                                 </li>
                             </ul>

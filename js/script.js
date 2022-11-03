@@ -193,7 +193,7 @@ createApp({
                 return id === item.id
             })
         }, 
-        sendMessage(){
+        sendMessage() {
             if(!this.newMessage) return;
             const msgDate = new Date().toLocaleDateString('it-IT');
             const newSentMessage = {
@@ -214,7 +214,13 @@ createApp({
     
                 this.contacts[this.activeContact].messages.push(newReceivedMessage);
             },1000)
-        }
+        },
+        printLastMsg(contact) {
+            const receivedMsg = contact.messages.filter((message)=> {
+               return message.status == 'received';
+            })
+            return receivedMsg[receivedMsg.length -1];
+        } 
     }
 }).mount('#app')
 
