@@ -15,6 +15,7 @@
         <div id="app">
             <div class="container px-0">
                 <div class="row">
+        <!-- Colonna di sinistra -->
                     <aside class="col-5 gx-0">
                         <nav class="d-flex justify-content-between align-items-center">
                             <div>
@@ -38,30 +39,30 @@
                                 <a href="#">Attiva notifiche desktop</a>
                             </div>
                         </div>
-
+        <!-- Search bar -->
                         <div class="search-bar d-flex align-items-center">
                             <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                             <input type="text" placeholder="Cerca o inizia una nuova chat">
                         </div>
-
+        <!-- Lista contatti -->
                         <div class="contacts-list">
                             <ul>
-                                <li v-for="(contact, id) in contacts" :key="id" @click="activateUser(id)">
+                                <li v-for="(contact, id) in contacts" :key="id" @click="activateUser(contact.id)">
                                     <div class="user-preview d-flex justify-content-start py-2" :class="id == activeContact ? 'active' : ''">
-                                        <img class="avatar-img" :src="`./img/avatar${contact.avatar}.jpg`" alt="User pic">
+                                        <img class="avatar-img" :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name">
                                         <span class="ms-3">{{ contact.name }}</span>
                                     </div>    
                                 </li>
                             </ul>
                         </div>
                     </aside>
-        
+        <!-- colonna di destra -->
                     <main class="col-7 gx-0">
                         <nav>
                             <div class="d-flex justify-content-between align-items-center pt-1">
                                 <div>
-                                    <img class="avatar-img nav-img" :src="`./img/avatar${contacts[activeContact].avatar}.jpg`" alt="User pic">
-                                    <span  class="ms-1">{{ contacts[activeContact].name }}</span>
+                                    <img class="avatar-img nav-img" :src="`./img/avatar${contacts[activeContact].avatar}.jpg`" :alt="contacts[activeContact].name">
+                                    <span class="ms-1">{{ contacts[activeContact].name }}</span>
                                 </div>
 
                                 <div class="icons">
@@ -71,18 +72,17 @@
                                 </div>
                             </div>
                         </nav>
-
+    	<!-- Finestra chat -->
                         <div class="chat-window">
-                            <ul>
-                                <li class="bubble" v-for="(item, index) in contacts[activeContact].messages" :class="item.status == 'sent' ? 'sent' : 'received'">
-                                    {{ contacts[activeContact].messages[index].message }}
-
-                                </li>           
-                            </ul>
+                            <div class="bubble" v-for="(item, index) in contacts[activeContact].messages" :key="index" :class="item.status == 'sent' ? 'sent' : 'received'">
+                            {{ contacts[activeContact].messages[index].message }}
+                            </div> 
                         </div>
-
-                        <footer>
-                            input 
+        <!-- Casella input messaggio -->
+                        <footer class="d-flex justify-content-around align-items-center">
+                            <i class="fa-regular fa-face-smile ms-3"></i>
+                            <input type="text" placeholder="Scrivi un messaggio">
+                            <i class="fa-solid fa-microphone me-3"></i>
                         </footer>
                     </main>   
                 </div>    
