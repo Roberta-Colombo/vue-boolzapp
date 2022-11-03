@@ -6,6 +6,7 @@ createApp({
             activeContact: 0,
             newMessage: '',
             userSearch: '',
+            visibileSelect: false,
             contacts: [
                 {
                     name: 'Michele',
@@ -185,7 +186,13 @@ createApp({
                 const userName = item.name.toLowerCase();
                 return userName.includes(this.userSearch.toLowerCase())
             })
-        }
+        },
+        // getLastMsgHour(contact) {
+        //     const date = this.printLastMsg(contact).date
+        //     const hoursAndMins = date.getHours() + ':' + date.getMinutes();
+        //     console.log(hoursAndMins)
+        //     return hoursAndMins;
+        // }
     },
     methods: {
         activateUser(id) {
@@ -195,13 +202,17 @@ createApp({
         }, 
         sendMessage() {
             if(!this.newMessage) return;
-            const msgDate = new Date().toLocaleDateString('it-IT');
+            const msgDate = new Date().toLocaleTimeString('it-IT', {
+            hour: '2-digit',
+            minute: '2-digit'              
+        });
+    
             const newSentMessage = {
                 date: msgDate,
                 message: this.newMessage,
                 status: 'sent'
             }
-
+            console.log(newSentMessage)
             this.contacts[this.activeContact].messages.push(newSentMessage);
             this.newMessage = '';
 
@@ -220,7 +231,24 @@ createApp({
                return message.status == 'received';
             })
             return receivedMsg[receivedMsg.length -1];
-        } 
+        },
+        printLastAccess(contacts, activeContact) {
+            const receivedMsg = contacts[activeContact].messages.filter((message)=> {
+                return message.status == 'received';
+             })
+             return receivedMsg[receivedMsg.length -1];
+        },
+        showSelect() {
+            this.visibileSelect = true;
+        }
+        // shortDate(contact) {
+        //     const lastMsgDate = printLastMsg(contact).date
+
+        //     return lastMsgDate.toLocaleTimeString('it-IT', {
+        //             hour: '2-digit',
+        //             minute: '2-digit'              
+        //     });            
+        // }
     }
 }).mount('#app')
 

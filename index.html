@@ -48,13 +48,19 @@
                         <div class="contacts-list">
                             <ul>
                                 <li v-for="(contact, id) in filteredContacts" :key="id" @click="activateUser(contact.id)">
-                                    <div class="user-preview d-flex justify-content-start py-2" :class="id == activeContact ? 'active' : ''">
-                                        <img class="avatar-img" :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name">
-                                        <div>
-                                            <div class="ms-3">{{ contact.name }}<br>
-                                            <div class="last-msg">{{ printLastMsg(contact).message }}</div>
-                                            </div> 
-                                              
+                                    <div class="user-preview d-flex justify-content-between py-2" :class="id == activeContact ? 'active' : ''">
+
+                                        <div class="d-flex justify-content-start align-items-center">
+                                            <img class="avatar-img" :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name">
+                                            <div class="ms-3">
+                                                <div>{{ contact.name }}</div>
+                                                <div class="details"> {{ printLastMsg(contact).message }} </div>
+                                            </div>     
+                                                                         
+                                        </div>
+
+                                        <div class="details text-end me-1">
+                                            {{ printLastMsg(contact).date }}
                                         </div>
                                     </div>    
                                 </li>
@@ -65,9 +71,17 @@
                     <main class="col-7 gx-0">
                         <nav>
                             <div class="d-flex justify-content-between align-items-center pt-1">
-                                <div>
-                                    <img class="avatar-img nav-img" :src="`./img/avatar${contacts[activeContact].avatar}.jpg`" :alt="contacts[activeContact].name">
-                                    <span class="ms-1">{{ contacts[activeContact].name }}</span>
+                                <div class="d-flex justify-content-start">
+                                    <div>
+                                        <img class="avatar-img nav-img" :src="`./img/avatar${contacts[activeContact].avatar}.jpg`" :alt="contacts[activeContact].name">
+                                    </div>
+                                 
+                                    <div class="ms-1">{{ contacts[activeContact].name }}
+                                        <div class="details">
+                                            Ultimo accesso 
+                                            {{ printLastAccess(contacts, activeContact).date }}
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="icons">
@@ -79,8 +93,17 @@
                         </nav>
     	<!-- Finestra chat -->
                         <div class="chat-window">
-                            <div class="bubble" v-for="(item, index) in contacts[activeContact].messages" :key="index" :class="item.status == 'sent' ? 'sent' : 'received'">
+                            <div class="bubble d-flex" v-for="(item, index) in contacts[activeContact].messages" :key="index" :class="item.status == 'sent' ? 'sent' : 'received'">
                             {{ contacts[activeContact].messages[index].message }}
+
+                                <div id="open-select" @click="showSelect">
+                                    <i class="fa-solid fa-angle-down ps-3"></i> 
+                                </div>
+                            
+                                <!-- <select name="msg-options" id="msg-options" class="hidden" :class="{ show: visibileSelect }">                               
+                                    <option value="info">Info messaggio</option>
+                                    <option value="delete">Cancella messaggio</option>
+                                </select> -->
                             </div> 
                         </div>
         <!-- Casella input messaggio -->

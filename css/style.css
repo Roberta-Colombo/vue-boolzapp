@@ -98,13 +98,13 @@ li {
     width: 40px;
 }
 
-.last-msg {
+.details {
     font-size: 11px;
     color: grey;
 }
 
 
-.icons i, footer i {
+.icons i, footer i, #open-select i {
     color: grey;
     margin-right: 15px;
     cursor: pointer;
@@ -132,6 +132,25 @@ footer {
     border-radius: 10px;
     padding: 7px 10px;
     max-width: 50%;
+    position: relative;
+}
+
+/* select {
+    position: absolute;
+    top: 50px;
+} */
+
+#open-select {
+    border-style: none;
+    background-color: transparent;
+}
+
+.hidden {
+    display: none;
+}
+
+.show {
+    display: block;
 }
 
 .sent {
