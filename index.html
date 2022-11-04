@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Boolzapp</title>
 </head>
 <body>
@@ -94,8 +94,16 @@
                         </nav>
     	<!-- Finestra chat -->
                         <div class="chat-window">
-                            <div class="bubble d-flex" v-for="(item, index) in contacts[activeContact].messages" :key="index" :class="item.status == 'sent' ? 'sent' : 'received'">
-                            {{ contacts[activeContact].messages[index].message }}
+                            <div ref="msg" class="bubble d-flex" v-for="(item, index) in contacts[activeContact].messages" :key="index" :class="item.status == 'sent' ? 'sent' : 'received'"> 
+
+                                <div class="justify-content-start align align-items-start">
+                                    {{ contacts[activeContact].messages[index].message }}
+                                </div>
+                            
+
+                                <div class="date-on-msg">
+                                    {{ contacts[activeContact].messages[index].date }}
+                                </div>
 
                                 <div id="open-select" @click="showOptBox(index)">
                                     <i class="fa-solid fa-angle-down ps-3"></i> 
@@ -110,7 +118,12 @@
                         </div>
         <!-- Casella input messaggio -->
                         <footer class="d-flex justify-content-around align-items-center">
-                            <i class="fa-regular fa-face-smile ms-3"></i>
+                            <i class="fa-regular fa-face-smile ms-3" @click="openEmoticonWindow"></i>
+
+                            <div class="emoticons-window" v-if="showEmoticons">
+                                <span v-for="(emoticon, index) in emoticons" :key="index" v-html="emoticon" @click="addEmoticon(index)"></span>
+                            </div>
+
                             <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage">
                             <i class="fa-solid fa-microphone me-3"></i>
                         </footer>

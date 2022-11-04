@@ -1,4 +1,4 @@
-const {createApp} = Vue 
+const { createApp } = Vue
 
 createApp({
     data() {
@@ -11,6 +11,53 @@ createApp({
                 show: false,
             },
             showChatWindow: false,
+            emoticons: [
+                '&#128512;',
+                '&#128513;',
+                '&#128514;',
+                '&#128515;',
+                '&#128516;',
+                '&#128517;',
+                '&#128518;',
+                '&#128519;',
+                '&#128521;',
+                '&#128522;',
+                '&#128523;',
+                '&#128524;',
+                '&#128525;',
+                '&#128526;',
+                '&#128528;',
+                '&#128529;',
+                '&#128530;',
+                '&#128536;',
+                '&#128545;',
+                '&#128548;',
+                '&#128561;',
+                '&#129315;',
+                '&#129299;',
+                '&#129319;',
+                '&#129321;',
+                '&#129325;',
+                '&#129488;',
+                '&#9996;',
+                '&#9995;',
+                '&#10024;',
+                '&#10062;',
+                '&#128064;',
+                '&#128077;',
+                '&#128079;',
+                '&#128152;',
+                '&#128149;',
+                '&#128156;',
+                '&#128158;',
+                '&#128584;',
+                '&#129310;',
+                '&#129505;',
+                '&#127802;',
+                '&#127801;',
+                '&#9749;'
+            ],
+            showEmoticons: false,
             contacts: [
                 {
                     name: 'Michele',
@@ -18,7 +65,7 @@ createApp({
                     avatar: '_1',
                     visible: true,
                     messages: [
-                        {  
+                        {
                             date: '10/01/2020 15:30:55',
                             message: 'Hai portato a spasso il cane?',
                             status: 'sent'
@@ -186,7 +233,7 @@ createApp({
     },
     computed: {
         filteredContacts() {
-            return  this.contacts = this.contacts.filter((item)=>{
+            return this.contacts = this.contacts.filter((item) => {
                 const userName = item.name.toLowerCase();
                 return userName.includes(this.userSearch.toLowerCase())
             })
@@ -200,7 +247,7 @@ createApp({
     },
     methods: {
         activateUser(id) {
-            this.activeContact = this.contacts.findIndex((item)=> {
+            this.activeContact = this.contacts.findIndex((item) => {
                 return id === item.id
             })
             this.switchWindow();
@@ -209,12 +256,12 @@ createApp({
             this.showChatWindow = !this.showChatWindow;
         },
         sendMessage() {
-            if(!this.newMessage) return;
+            if (!this.newMessage) return;
             const msgDate = new Date().toLocaleTimeString('it-IT', {
-            hour: '2-digit',
-            minute: '2-digit'              
-        });
-    
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
             const newSentMessage = {
                 date: msgDate,
                 message: this.newMessage,
@@ -224,30 +271,35 @@ createApp({
             this.contacts[this.activeContact].messages.push(newSentMessage);
             this.newMessage = '';
 
-            setTimeout(()=> {
+            setTimeout(() => {
                 const newReceivedMessage = {
                     date: msgDate,
                     message: 'OK!',
                     status: 'received'
                 }
-    
+
                 this.contacts[this.activeContact].messages.push(newReceivedMessage);
-            },1000)
+                
+                this.$nextTick(()=>{
+                    const element = this.$refs.msg[this.$refs.msg.length - 1]
+                    element.scrollIntoView()
+                });
+            }, 1000)
         },
         printLastMsg(contact) {
-            const receivedMsg = contact.messages.filter((message)=> {
-               return message.status == 'received';
+            const receivedMsg = contact.messages.filter((message) => {
+                return message.status == 'received';
             })
-            return receivedMsg[receivedMsg.length -1];
+            return receivedMsg[receivedMsg.length - 1];
         },
         printLastAccess(contacts, activeContact) {
-            const receivedMsg = contacts[activeContact].messages.filter((message)=> {
+            const receivedMsg = contacts[activeContact].messages.filter((message) => {
                 return message.status == 'received';
-             })
-             return receivedMsg[receivedMsg.length -1];
+            })
+            return receivedMsg[receivedMsg.length - 1];
         },
         showOptBox(index) {
-            if(index === this.msgOpt.index && this.msgOpt.show){
+            if (index === this.msgOpt.index && this.msgOpt.show) {
                 this.msgOpt.index = null;
                 this.msgOpt.show = false;
             } else {
@@ -256,17 +308,14 @@ createApp({
             }
         },
         deleteMsg(activeContact, index) {
-            this.contacts[activeContact].messages.splice(index, 1);    
+            this.contacts[activeContact].messages.splice(index, 1);
+        },
+        openEmoticonWindow() {
+            this.showEmoticons = !this.showEmoticons
+        },
+        addEmoticon(index) {
+            this.newMessage += this.emoticons[index]
         }
-
-        // shortDate(contact) {
-        //     const lastMsgDate = printLastMsg(contact).date
-
-        //     return lastMsgDate.toLocaleTimeString('it-IT', {
-        //             hour: '2-digit',
-        //             minute: '2-digit'              
-        //     });            
-        // }
     }
 }).mount('#app')
 
