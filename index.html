@@ -96,15 +96,16 @@
                             <div class="bubble d-flex" v-for="(item, index) in contacts[activeContact].messages" :key="index" :class="item.status == 'sent' ? 'sent' : 'received'">
                             {{ contacts[activeContact].messages[index].message }}
 
-                                <div id="open-select" @click="showSelect">
+                                <div id="open-select" @click="showOptBox(index)">
                                     <i class="fa-solid fa-angle-down ps-3"></i> 
                                 </div>
-                            
-                                <!-- <select name="msg-options" id="msg-options" class="hidden" :class="{ show: visibileSelect }">                               
-                                    <option value="info">Info messaggio</option>
-                                    <option value="delete">Cancella messaggio</option>
-                                </select> -->
+                                
+                                <div class="opt-box" v-if="msgOpt.index === index && msgOpt.show">
+                                    Info messaggio<br>
+                                    <div class="delete-msg" @click="deleteMsg(activeContact, index)">Cancella messaggio</div>
+                                </div>
                             </div> 
+
                         </div>
         <!-- Casella input messaggio -->
                         <footer class="d-flex justify-content-around align-items-center">

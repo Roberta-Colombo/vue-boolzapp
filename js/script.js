@@ -6,7 +6,11 @@ createApp({
             activeContact: 0,
             newMessage: '',
             userSearch: '',
-            visibileSelect: false,
+            eraseMsg: false,
+            msgOpt: {
+                index: null,
+                show: false,
+            },
             contacts: [
                 {
                     name: 'Michele',
@@ -238,9 +242,19 @@ createApp({
              })
              return receivedMsg[receivedMsg.length -1];
         },
-        showSelect() {
-            this.visibileSelect = true;
+        showOptBox(index) {
+            if(index === this.msgOpt.index && this.msgOpt.show){
+                this.msgOpt.index = null;
+                this.msgOpt.show = false;
+            } else {
+                this.msgOpt.index = index;
+                this.msgOpt.show = true;
+            }
+        },
+        deleteMsg(activeContact, index) {
+            this.contacts[activeContact].messages.splice(index, 1);    
         }
+
         // shortDate(contact) {
         //     const lastMsgDate = printLastMsg(contact).date
 
