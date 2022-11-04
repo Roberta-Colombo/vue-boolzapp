@@ -16,7 +16,7 @@
             <div class="container px-0">
                 <div class="row">
         <!-- Colonna di sinistra -->
-                    <aside class="col-5 gx-0">
+                    <aside class="col-sm-12 col-md-5 d-md-block gx-0" :class="{'d-none' : showChatWindow, 'd-sm-none' : showChatWindow}">
                         <nav class="d-flex justify-content-between align-items-center">
                             <div>
                                 <img class="avatar-img nav-img" src="./img/avatar_io.jpg" alt="Your pic">
@@ -68,7 +68,7 @@
                         </div>
                     </aside>
         <!-- colonna di destra -->
-                    <main class="col-7 gx-0">
+                    <main class="col-sm-12 col-md-7 d-md-block gx-0" :class="{'d-none' : !showChatWindow, 'd-sm-none' : !showChatWindow}">
                         <nav>
                             <div class="d-flex justify-content-between align-items-center pt-1">
                                 <div class="d-flex justify-content-start">
@@ -85,6 +85,7 @@
                                 </div>
 
                                 <div class="icons">
+                                    <i class="fa-solid fa-circle-left d-md-none" @click="switchWindow"></i>
                                     <i class="fa-solid fa-magnifying-glass"></i> 
                                     <i class="fa-solid fa-paperclip"></i>
                                     <i class="fa-solid fa-ellipsis-vertical"></i>

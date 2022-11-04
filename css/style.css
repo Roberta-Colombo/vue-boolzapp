@@ -13,6 +13,7 @@
 aside {
     background-color: white;
     height: calc(100vh - 60px);
+    border-right:1px solid rgba(216, 219, 214, 1);
 }
 
 .contacts-list {

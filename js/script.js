@@ -6,11 +6,11 @@ createApp({
             activeContact: 0,
             newMessage: '',
             userSearch: '',
-            eraseMsg: false,
             msgOpt: {
                 index: null,
                 show: false,
             },
+            showChatWindow: false,
             contacts: [
                 {
                     name: 'Michele',
@@ -203,7 +203,11 @@ createApp({
             this.activeContact = this.contacts.findIndex((item)=> {
                 return id === item.id
             })
-        }, 
+            this.switchWindow();
+        },
+        switchWindow() {
+            this.showChatWindow = !this.showChatWindow;
+        },
         sendMessage() {
             if(!this.newMessage) return;
             const msgDate = new Date().toLocaleTimeString('it-IT', {
