@@ -3,6 +3,8 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
+            showSplash: true,
+            darkMode: false,
             activeContact: 0,
             newMessage: '',
             userSearch: '',
@@ -11,6 +13,13 @@ createApp({
                 show: false,
             },
             showChatWindow: false,
+            defaultAnswers: [
+                'Va bene',
+                'Sono al lavoro',
+                'Ti chiamo più tardi',
+                'Bella storia',
+                'Ma dai??'
+            ],
             emoticons: [
                 '&#128512;',
                 '&#128513;',
@@ -246,6 +255,14 @@ createApp({
         // }
     },
     methods: {
+        switchMode(){
+            this.darkMode = !this.darkMode;
+        },
+        deactivateSplash() {
+            setTimeout(()=> {
+                this.showSplash = false;
+            }, 1000);
+        },
         activateUser(id) {
             this.activeContact = this.contacts.findIndex((item) => {
                 return id === item.id
@@ -272,9 +289,10 @@ createApp({
             this.newMessage = '';
 
             setTimeout(() => {
+                const randomAnswer = this.defaultAnswers[Math.floor(Math.random()*this.defaultAnswers.length)];
                 const newReceivedMessage = {
                     date: msgDate,
-                    message: 'OK!',
+                    message: randomAnswer,
                     status: 'received'
                 }
 
@@ -316,6 +334,9 @@ createApp({
         addEmoticon(index) {
             this.newMessage += this.emoticons[index]
         }
+    },
+    mounted() {
+        this.deactivateSplash();
     }
 }).mount('#app')
 

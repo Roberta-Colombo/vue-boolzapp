@@ -1,6 +1,71 @@
+:root {
+    --white: #ffffff;
+    --black: #000000; 
+    --emerald: rgba(0, 150, 136, 1);
+    --dirtywhite: rgba(216, 219, 214, 1);
+    --lightgrey: #EAEAEA;
+    --lightblue: #8EDAFC;
+    --grey: rgb(128, 128, 128);
+    --darkgrey: rgb(169, 169, 169);
+    --lightgreen: rgb(203, 246, 203);
+    --active: #E5DDD5;
+    --hover-active: #e5ddd582;
+    --light-black: #252424;
+    --grey-black: #3e3d3d; 
+}
+
+.splash-screen {
+    position: absolute;
+    background-color: var(--white);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+}
+
+.inner-splash {
+    border:4px double var(--dirtywhite);
+    height: 70%;
+    width: 40%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--emerald);
+    border-radius: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+    display: d-flex;
+    flex-flow: column;
+    justify-content: end;
+    align-items: center;
+    padding-top: 60px;
+    font-family: 'Kanit', sans-serif;
+}
+
+.fa-comment-dots {
+    font-size: 150px;
+    color: var(--active)
+}
+
+.logo {
+    letter-spacing: 0.6rem;
+    color: var(--active);
+    font-size: 2rem;
+    font-weight: bold; 
+    padding-top: 45px;  
+}
+
+.loading {
+    color: var(--white);
+    font-size: 1.2rem;
+    padding-top: 2.6rem;
+}
+
 .wrapper {
     height: 100vh;
-    background: linear-gradient(to bottom, rgba(0, 150, 136, 1) 0%, rgba(0, 150, 136, 1) 18%, rgba(216, 219, 214, 1) 18%,  rgba(216, 219, 214, 1) 100%);
+    background: linear-gradient(to bottom, var(--emerald) 0%, var(--emerald) 18%, var(--dirtywhite) 18%,  var(--dirtywhite) 100%);
     padding-top: 30px;
 }
 
@@ -11,25 +76,25 @@
 }
 
 aside {
-    background-color: white;
+    background-color: var(--white);
     height: calc(100vh - 60px);
-    border-right:1px solid rgba(216, 219, 214, 1);
+    border-right:1px solid var(--dirtywhite);
 }
 
 .contacts-list {
-    height: calc((100vh - 60px) - 150px);
+    height: calc((100vh - 60px) - 190px);
     overflow: hidden;
     overflow-y: auto;
 }
 
 nav {
     height: 50px;
-    background-color: #EAEAEA;
+    background-color: var(--lightgrey);
 }
 
 .new-notifications {
     height: 60px;
-    background-color: #8EDAFC;
+    background-color: var(--lightblue);
     font-size: 0.8rem;
     line-height: 1;
 }
@@ -38,8 +103,8 @@ nav {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: white;
-    color: #8EDAFC;
+    background-color: var(--white);
+    color: var(--lightblue);
     text-align: center; 
     line-height: 40px;
     font-size: 1rem;
@@ -52,9 +117,10 @@ a {
     color: grey;
     font-size: 0.6rem;
 }
+
 .search-bar {
     height: 40px;
-    background-color: #EAEAEA;
+    background-color: var(--lightgrey);
     text-align: center;
 }
 
@@ -62,10 +128,10 @@ a {
     height: 25px;
     margin-left: 10px;
     border-style: none;
-    border-right: 1px solid #EAEAEA;
-    color: darkgray;
+    border-right: 1px solid var(--lightgrey);
+    color: var(--darkgrey);
     width: 10%;
-    background-color: white;
+    background-color: var(--white);
     font-size: 12px;
 }
 
@@ -74,7 +140,7 @@ input {
     border-style: none;
     border-radius: 2px;
     font-size: 11px;
-    color: darkgray;
+    color: var(--darkgrey);
     height: 25px;
     padding-left: 10px;
 }
@@ -85,7 +151,7 @@ ul {
 }
 
 li {
-    border-top: 1px solid #EAEAEA;
+    border-top: 1px solid var(--lightgrey);
     padding-left: 0;
 }
 
@@ -101,24 +167,36 @@ li {
 
 .details {
     font-size: 11px;
-    color: grey;
+    color: var(--grey);
 }
 
 
 .icons i, footer i, #open-select i {
-    color: grey;
+    color: var(--grey);
     margin-right: 15px;
     cursor: pointer;
 }
 
 footer {
     height: 50px;
-    background-color: #EAEAEA;
+    background-color: var(--lightgrey);
 }
 
 .chat-window {
     height: calc((100vh - 60px) - 100px);
     background-image: url("../img/mine.jpg");
+    overflow: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 25px 35px;
+}
+
+.chat-window-dark {
+    height: calc((100vh - 60px) - 100px);
+    background-color: var(--light-black);
     overflow: hidden;
     overflow-y: auto;
     display: flex;
@@ -134,7 +212,6 @@ footer {
     padding: 7px 10px;
     max-width: 50%;
     position: relative;
-    /* height: 50px; */
 }
 
 .date-on-msg {
@@ -143,20 +220,17 @@ footer {
     justify-content: flex-end;
     align-items: flex-end;
     font-size: 8px;
-    color: grey;
+    color: var(--grey);
     text-align: right;
     margin-top: 30px;
     width: 150px;
-    /* position: absolute;
-    bottom: 3px;
-    left: 50%; */
 }
 
 .opt-box {
     position: absolute;
     top: 35px;
     left: 50px;
-    background-color: #EAEAEA;
+    background-color: var(--lightgrey);
     width: 180px;
     font-size: 13px;
     padding: 10px 20px;
@@ -180,21 +254,22 @@ footer {
 }
 
 .sent {
-    background-color: rgb(203, 246, 203);
+    background-color: var(--lightgreen);
     align-self: flex-end;
 }
 
 .received {
-    background-color: white;
+    background-color: var(--white);
     align-self: flex-start;
 }
 
 .active {
-    background-color: #E5DDD5;
+    background-color: var(--active);
+    color: var(--black);
 }
 
 .user-preview:hover {
-    background-color: #e5ddd582;
+    background-color: var(--hover-active);
 }
 
 footer input {
@@ -213,7 +288,7 @@ main {
 .emoticons-window {
     height: 150px;
     width: 280px;
-    background-color: white;
+    background-color: var(--white);
     position: absolute;
     bottom: 50px;
     left: 0;
@@ -222,4 +297,32 @@ main {
     line-height: 1.8;
     cursor: pointer;
     box-shadow: 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Dark mode: */
+.toggle-mode-div {
+    background-color: var(--white);
+    height: 40px;
+}
+
+.fa-toggle-off, .fa-toggle-on {
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--grey);
+}
+
+.toggle-text-div {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--grey);
+}
+
+.dark-mode {
+    background-color: var(--light-black);
+    color: var(--dirtywhite);
+}
+
+.dark-nav {
+    background-color: var(--grey-black);
+    color: var(--dirtywhite);
 }
