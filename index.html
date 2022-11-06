@@ -43,7 +43,7 @@
                         <div class="toggle-mode-div d-flex justify-content-start align-items-center px-3" :class="{ 'dark-mode' : darkMode }">
                             <div class="toggle-text-div" v-if="!darkMode">Passa alla modalit&agrave; dark:</div>
                             <i class="fa-solid fa-toggle-off ps-3" v-if="!darkMode" @click="switchMode"></i>
-                            <div class="toggle-text-div" v-if="darkMode">Passa alla modalit&agrave; light:</div>
+                            <div class="toggle-text-div" v-if="darkMode">Torna alla modalit&agrave; light:</div>
                             <i class="fa-solid fa-toggle-on ps-3" v-if="darkMode" @click="switchMode"></i>
                         </div>
     <!-- Barra azzurra notifiche -->
@@ -71,12 +71,12 @@
                                             <img class="avatar-img" :src="`./img/avatar${contact.avatar}.jpg`" :alt="contact.name">
                                             <div class="ms-3">
                                                 <div>{{ contact.name }}</div>
-                                                <div class="details"> {{ printLastMsg(contact).message }} </div>
+                                                <div class="details" v-if="contacts[activeContact].messages.length > 0"> {{ printLastMsg(contact).message }} </div>
                                             </div>     
                                                                          
                                         </div>
 
-                                        <div class="details text-end me-1">
+                                        <div class="details text-end me-1"  v-if="contacts[activeContact].messages.length > 0">
                                             {{ printLastMsg(contact).date }}
                                         </div>
                                     </div>    
@@ -94,7 +94,7 @@
                                     </div>
                                  
                                     <div class="ms-2">{{ contacts[activeContact].name }}
-                                        <div ref="last-access" class="details">
+                                        <div ref="last-access" class="details" v-if="contacts[activeContact].messages.length > 0">
                                             Ultimo accesso 
                                             {{ printLastAccess(contacts, activeContact).date }}
                                         </div>
@@ -113,12 +113,12 @@
                         <div :class="{ 'chat-window' : !darkMode, 'chat-window-dark' : darkMode }">
                             <div ref="msg" class="bubble d-flex" v-for="(item, index) in contacts[activeContact].messages" :key="index" :class="item.status == 'sent' ? 'sent' : 'received'"> 
 
-                                <div class="justify-content-start align align-items-start">
+                                <div class="justify-content-start align align-items-start" v-if="contacts[activeContact].messages.length > 0">
                                     {{ contacts[activeContact].messages[index].message }}
                                 </div>
                             
 
-                                <div class="date-on-msg">
+                                <div class="date-on-msg" v-if="contacts[activeContact].messages.length > 0">
                                     {{ contacts[activeContact].messages[index].date }}
                                 </div>
 
