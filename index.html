@@ -113,8 +113,7 @@
                         <div :class="{ 'chat-window' : !darkMode, 'chat-window-dark' : darkMode }">
                             <div ref="msg" class="bubble d-flex" v-for="(item, index) in contacts[activeContact].messages" :key="index" :class="item.status == 'sent' ? 'sent' : 'received'"> 
 
-                                <div class="justify-content-start align align-items-start" v-if="contacts[activeContact].messages.length > 0">
-                                    {{ contacts[activeContact].messages[index].message }}
+                                <div class="justify-content-start align align-items-start" v-if="contacts[activeContact].messages.length > 0" v-html="contacts[activeContact].messages[index].message">
                                 </div>
                             
 
@@ -129,6 +128,7 @@
                                 <div class="opt-box" v-if="msgOpt.index === index && msgOpt.show">
                                     Info messaggio<br>
                                     <div class="delete-msg" @click="deleteMsg(activeContact, index)">Cancella messaggio</div>
+                                    <div class="delete-msg" @click="deleteAll(activeContact)">Cancella intera chat</div>
                                 </div>
                             </div> 
 

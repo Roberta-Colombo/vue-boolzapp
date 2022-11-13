@@ -327,6 +327,11 @@ createApp({
         },
         deleteMsg(activeContact, index) {
             this.contacts[activeContact].messages.splice(index, 1);
+            this.msgOpt.show = false;
+        },
+        // da controllare:
+        deleteAll(activeContact) {
+            this.contacts[activeContact].messages = [];
         },
         openEmoticonWindow() {
             this.showEmoticons = !this.showEmoticons
